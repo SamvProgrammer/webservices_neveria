@@ -16,4 +16,5 @@ public interface productosDao {
     public Object insertar(productos p);
     public Object eliminar(productos p);
     public Object actualizar(productos p);
+    public Object getEspecifico(productos p);
 }

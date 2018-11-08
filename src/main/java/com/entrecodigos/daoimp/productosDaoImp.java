@@ -94,4 +94,15 @@ public class productosDaoImp implements productosDao{
 
         return respuesta;
     }
+
+    @Override
+    public Object getEspecifico(productos p) {
+        
+
+        int id = p.getId();
+        List<Map<String,Object>> consulta = jdbcTemplate.queryForList("select * from productos where id=?;",new Object[]{
+         id
+        });
+        return consulta;
+    }
 }
