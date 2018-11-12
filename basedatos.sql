@@ -55,6 +55,67 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: cliente; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.cliente (
+    id integer NOT NULL,
+    fecha_venta date,
+    pagado boolean,
+    id_mesa integer
+);
+
+
+ALTER TABLE public.cliente OWNER TO postgres;
+
+--
+-- Name: detalle_productocliente; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.detalle_productocliente (
+    id_producto integer,
+    id_mesa integer,
+    cantidad integer
+);
+
+
+ALTER TABLE public.detalle_productocliente OWNER TO postgres;
+
+--
+-- Name: mesa; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.mesa (
+    id integer NOT NULL,
+    descripcion character varying(200)
+);
+
+
+ALTER TABLE public.mesa OWNER TO postgres;
+
+--
+-- Name: mesa_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.mesa_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.mesa_id_seq OWNER TO postgres;
+
+--
+-- Name: mesa_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.mesa_id_seq OWNED BY public.cliente.id;
+
+
+--
 -- Name: productos; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -92,6 +153,13 @@ ALTER SEQUENCE public.productos_id_seq OWNED BY public.productos.id;
 
 
 --
+-- Name: cliente id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cliente ALTER COLUMN id SET DEFAULT nextval('public.mesa_id_seq'::regclass);
+
+
+--
 -- Name: productos id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -99,21 +167,69 @@ ALTER TABLE ONLY public.productos ALTER COLUMN id SET DEFAULT nextval('public.pr
 
 
 --
+-- Data for Name: cliente; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.cliente (id, fecha_venta, pagado, id_mesa) FROM stdin;
+\.
+
+
+--
+-- Data for Name: detalle_productocliente; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.detalle_productocliente (id_producto, id_mesa, cantidad) FROM stdin;
+\.
+
+
+--
+-- Data for Name: mesa; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.mesa (id, descripcion) FROM stdin;
+1	Mesa 1
+2	Mesa 2
+\.
+
+
+--
 -- Data for Name: productos; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.productos (id, nombre, descripcion, precio, rutaimagen) FROM stdin;
-3	joel	hola	3.23	234
-4	joel	hola	3.23	234
-5	joel	hola	3.23	234
+40	Doble cara mozarela	BBab	9797	imagenenviar
+37	cono de nieve	234	324	imagenenviar
 \.
+
+
+--
+-- Name: mesa_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.mesa_id_seq', 1, false);
 
 
 --
 -- Name: productos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.productos_id_seq', 5, true);
+SELECT pg_catalog.setval('public.productos_id_seq', 40, true);
+
+
+--
+-- Name: cliente mesa_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cliente
+    ADD CONSTRAINT mesa_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: mesa mesa_pkey1; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.mesa
+    ADD CONSTRAINT mesa_pkey1 PRIMARY KEY (id);
 
 
 --

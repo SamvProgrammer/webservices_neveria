@@ -5,6 +5,7 @@
  */
 package com.entrecodigos.controllers;
 
+import com.entrecodigos.dao.mesasDao;
 import com.entrecodigos.dao.productosDao;
 import com.entrecodigos.repositorio.productos;
 import javax.servlet.http.HttpServletRequest;
@@ -31,21 +32,26 @@ public class catalogosControllers {
     @Autowired
     @Qualifier("objProductosDao")
     private productosDao objProductos;
+    
+    @Autowired
+    @Qualifier("objMesasDao")
+    private mesasDao objMesas;
+    
 
- //   @CrossOrigin(origins = "http://localhost:8100")
+    @CrossOrigin(origins = "http://localhost:8100")
     @GetMapping("/productos")
     public Object obtenerProductos() {
         return objProductos.getProductos();
     }
-    
-   // @CrossOrigin(origins = "http://localhost:8100")
+
+    @CrossOrigin(origins = "http://localhost:8100")
     @PostMapping("/productos")
     public Object insertarProductos(@RequestBody productos obj, HttpServletRequest request) {
         Object respuesta = objProductos.insertar(obj);
         return respuesta;
     }
 
-   // @CrossOrigin(origins = "http://localhost:8100")
+    @CrossOrigin(origins = "http://localhost:8100")
     @DeleteMapping("/productos/{identificador}")
     public Object eliminarRol(@PathVariable(value = "identificador") String id) {
         productos obj = new productos();
@@ -54,20 +60,27 @@ public class catalogosControllers {
         return respuesta;
     }
 
-   // @CrossOrigin(origins = "http://localhost:8100")
+    @CrossOrigin(origins = "http://localhost:8100")
     @PutMapping("/productos/{identificador}")
     public Object actualizarRol(@PathVariable(value = "identificador") String id, @RequestBody productos obj, HttpServletRequest request) {
         obj.setId(Integer.parseInt(id));
         Object respuesta = objProductos.actualizar(obj);
         return respuesta;
     }
-    
-    //@CrossOrigin(origins = "http://localhost:8100")
+
+    @CrossOrigin(origins = "http://localhost:8100")
     @GetMapping("/productos/{identificador}")
     public Object getProducto(@PathVariable(value = "identificador") String id) {
         productos obj = new productos();
         obj.setId(Integer.parseInt(id));
         Object respuesta = objProductos.getEspecifico(obj);
         return respuesta;
+    }
+    
+    //***********************cátalogo de mesas**********************************
+    @CrossOrigin(origins = "http://localhost:8100")
+    @GetMapping("/mesas")
+    public Object obtenerMesas() {
+        return objMesas.getMesas();
     }
 }
