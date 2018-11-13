@@ -62,7 +62,8 @@ CREATE TABLE public.cliente (
     id integer NOT NULL,
     fecha_venta date,
     pagado boolean,
-    id_mesa integer
+    id_mesa integer,
+    total double precision
 );
 
 
@@ -170,7 +171,9 @@ ALTER TABLE ONLY public.productos ALTER COLUMN id SET DEFAULT nextval('public.pr
 -- Data for Name: cliente; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.cliente (id, fecha_venta, pagado, id_mesa) FROM stdin;
+COPY public.cliente (id, fecha_venta, pagado, id_mesa, total) FROM stdin;
+7	2018-10-13	t	1	440
+8	2018-10-13	t	1	3.3999999999999999
 \.
 
 
@@ -179,6 +182,10 @@ COPY public.cliente (id, fecha_venta, pagado, id_mesa) FROM stdin;
 --
 
 COPY public.detalle_productocliente (id_producto, id_mesa, cantidad) FROM stdin;
+42	7	5
+42	7	1
+41	7	2
+45	8	4
 \.
 
 
@@ -197,8 +204,9 @@ COPY public.mesa (id, descripcion) FROM stdin;
 --
 
 COPY public.productos (id, nombre, descripcion, precio, rutaimagen) FROM stdin;
-40	Doble cara mozarela	BBab	9797	imagenenviar
-37	cono de nieve	234	324	imagenenviar
+41	Cono de nieve	Relleno de chocolate	25	imagenenviar
+42	Nutella con nieve	Es un rico manjar que todos probaría.	65	imagenenviar
+45	Joe	Hfjgf	0.84999999999999998	imagenenviar
 \.
 
 
@@ -206,14 +214,14 @@ COPY public.productos (id, nombre, descripcion, precio, rutaimagen) FROM stdin;
 -- Name: mesa_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.mesa_id_seq', 1, false);
+SELECT pg_catalog.setval('public.mesa_id_seq', 8, true);
 
 
 --
 -- Name: productos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.productos_id_seq', 40, true);
+SELECT pg_catalog.setval('public.productos_id_seq', 45, true);
 
 
 --
