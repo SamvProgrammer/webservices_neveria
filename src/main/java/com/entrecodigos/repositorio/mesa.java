@@ -10,10 +10,8 @@ package com.entrecodigos.repositorio;
  * @author samv
  */
 public class mesa {
-    private int id;
-    private String fecha;
-    private boolean pagado;
-    private int id_mesa;
+   private int id;
+   private String descripcion;
 
     public int getId() {
         return id;
@@ -23,27 +21,11 @@ public class mesa {
         this.id = id;
     }
 
-    public String getFecha() {
-        return fecha;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
-
-    public boolean isPagado() {
-        return pagado;
-    }
-
-    public void setPagado(boolean pagado) {
-        this.pagado = pagado;
-    }
-
-    public int getId_mesa() {
-        return id_mesa;
-    }
-
-    public void setId_mesa(int id_mesa) {
-        this.id_mesa = id_mesa;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 }

@@ -5,6 +5,8 @@
  */
 package com.entrecodigos.dao;
 
+import com.entrecodigos.repositorio.cliente;
+import com.entrecodigos.repositorio.detalle_productocliente;
 import com.entrecodigos.repositorio.mesa;
 import com.entrecodigos.repositorio.productos;
 
@@ -14,5 +16,8 @@ import com.entrecodigos.repositorio.productos;
  */
 public interface ventaDao {
     public Object getVentasCliente(boolean historico);
-    public Object insertar(mesa p);
+    public Object insertar(cliente p);
+    public Object insertarDetalle(detalle_productocliente p);
+    public Object getDetalleVentasCliente(int id_mesa);
+    public Object cuentaCerrada(cliente p);
 }
