@@ -38,37 +38,37 @@ public class catalogosControllers {
     private mesasDao objMesas;
     
 
-   // @CrossOrigin(origins = "http://localhost:8100")
+    @CrossOrigin(origins = "http://localhost:8100")
     @GetMapping("/productos")
     public Object obtenerProductos() {
         return objProductos.getProductos();
     }
 
-    //@CrossOrigin(origins = "http://localhost:8100")
+    @CrossOrigin(origins = "http://localhost:8100")
     @PostMapping("/productos")
     public Object insertarProductos(@RequestBody productos obj, HttpServletRequest request) {
         Object respuesta = objProductos.insertar(obj);
         return respuesta;
     }
 
-  //  @CrossOrigin(origins = "http://localhost:8100")
+    @CrossOrigin(origins = "http://localhost:8100")
     @DeleteMapping("/productos/{identificador}")
-    public Object eliminarRol(@PathVariable(value = "identificador") String id) {
+    public Object eliminarProductos(@PathVariable(value = "identificador") String id) {
         productos obj = new productos();
         obj.setId(Integer.parseInt(id));
         Object respuesta = objProductos.eliminar(obj);
         return respuesta;
     }
 
-   // @CrossOrigin(origins = "http://localhost:8100")
+    @CrossOrigin(origins = "http://localhost:8100")
     @PutMapping("/productos/{identificador}")
-    public Object actualizarRol(@PathVariable(value = "identificador") String id, @RequestBody productos obj, HttpServletRequest request) {
+    public Object actualizarProductos(@PathVariable(value = "identificador") String id, @RequestBody productos obj, HttpServletRequest request) {
         obj.setId(Integer.parseInt(id));
         Object respuesta = objProductos.actualizar(obj);
         return respuesta;
     }
 
-  //  @CrossOrigin(origins = "http://localhost:8100")
+    @CrossOrigin(origins = "http://localhost:8100")
     @GetMapping("/productos/{identificador}")
     public Object getProducto(@PathVariable(value = "identificador") String id) {
         productos obj = new productos();
@@ -78,7 +78,7 @@ public class catalogosControllers {
     }
     
     //***********************cátalogo de mesas**********************************
- //   @CrossOrigin(origins = "http://localhost:8100")
+    @CrossOrigin(origins = "http://localhost:8100")
     @GetMapping("/mesas")
     public Object obtenerMesas() {
         return objMesas.getMesas();
